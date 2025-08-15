@@ -12,6 +12,8 @@ export interface Article {
   urlToImage: string | null;
   publishedAt: string; // ISO string
   content: string | null;
+  id?: string;
+  category?: string;
 }
 
 export interface NewsApiResponse {

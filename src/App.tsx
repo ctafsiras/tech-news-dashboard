@@ -7,8 +7,9 @@ import { ArticlesGrid } from './components/ArticlesGrid';
 import { Layout, MainContainer } from './components/Layout';
 import type { Article, Category } from './types/news';
 import { fetchTechNews } from './services/newsApi';
-import { useLocalStorage } from './hooks/useLocalStorage';
+import { useLocalStorage } from './hooks/useLocalStorage'
 import { useColorMode } from './hooks/useColorMode'
+import { generateDummyNews } from './utils/dummyNews'
 
 function App() {
   const { mode, toggle } = useColorMode()
@@ -35,7 +36,11 @@ function App() {
       } catch (e: unknown) {
         if (!ignore) {
           const msg = e instanceof Error ? e.message : 'Failed to load news'
-          setError(`${msg} | NewsAPI development plan doesn't work in production`)
+          console.warn('Using fallback dummy news data due to:', msg)
+          // Generate 10 dummy articles for the current category
+          const dummyNews = generateDummyNews(10, categoryQuery === 'all' ? undefined : categoryQuery)
+          setArticles(dummyNews)
+          setError(`Showing demo data | ${msg} | NewsAPI development plan doesn't work in production`)
         }
       } finally {
         if (!ignore) setLoading(false)
