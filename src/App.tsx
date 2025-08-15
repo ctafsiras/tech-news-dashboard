@@ -35,7 +35,7 @@ function App() {
       } catch (e: unknown) {
         if (!ignore) {
           const msg = e instanceof Error ? e.message : 'Failed to load news'
-          setError(msg)
+          setError(`${msg} | NewsAPI development plan doesn't work in production`)
         }
       } finally {
         if (!ignore) setLoading(false)
