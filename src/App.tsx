@@ -40,7 +40,7 @@ function App() {
           // Generate 10 dummy articles for the current category
           const dummyNews = generateDummyNews(10, categoryQuery === 'all' ? undefined : categoryQuery)
           setArticles(dummyNews)
-          setError(`Showing demo data | ${msg} | NewsAPI development plan doesn't work in production`)
+          setError(`Showing dummy data | NewsAPI development plan doesn't work in production`)
         }
       } finally {
         if (!ignore) setLoading(false)
