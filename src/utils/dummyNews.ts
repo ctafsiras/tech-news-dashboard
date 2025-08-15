@@ -1,6 +1,10 @@
 import type { Article } from "../types/news";
 
-const PLACEHOLDER_IMAGE = "https://via.placeholder.com/600x400?text=No+Image";
+const getRandomImage = (seed: string) => {
+  const width = 600;
+  const height = 400;
+  return `https://picsum.photos/seed/${seed}/${width}/${height}?grayscale`;
+};
 const CATEGORIES = [
   "technology",
   "business",
@@ -38,7 +42,7 @@ const generateDummyArticle = (index: number, category: string): Article => {
     title,
     description: `This is a sample news article about ${category}. The quick brown fox jumps over the lazy dog.`,
     url: `#${id}`,
-    urlToImage: PLACEHOLDER_IMAGE,
+    urlToImage: getRandomImage(id),
     publishedAt: new Date(
       Date.now() - Math.floor(Math.random() * 7 * 24 * 60 * 60 * 1000)
     ).toISOString(),
